@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rusting on wasm Calculator</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    <div class="calculator">
+      <h1 class="calculator-header">Rusting on wasm</h1>
+      <div class="calculator-body">
+        <div class="input-group">
+          <label for="num1">Number 1:</label>
+          <input type="number" id="num1" placeholder="Enter number" />
+        </div>
+        <div class="input-group">
+          <label for="operation">Operation:</label>
+          <select id="operation" class="select-group">
+            <option value="add">+</option>
+            <option value="subtract">-</option>
+            <option value="multiply">*</option>
+            <option value="divide">/</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="num2">Number 2:</label>
+          <input type="number" id="num2" placeholder="Enter number" />
+        </div>
+        <div class="button-group">
+          <button onclick="updateResult()">Calculate</button>
+        </div>
+        <div id="result">Result:</div>
+      </div>
+    </div>
+  </body>
+</html>
