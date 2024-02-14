@@ -66,6 +66,8 @@ git clone https://github.com/bibitchhetri/wasm-meets-rust-calc.git
 
 #### Jump to the build section below for more info
 
+# or
+
 ### Create a new Rust project:
 
 ```
@@ -109,6 +111,80 @@ cargo install wasm-pack
 ```
 wasm-pack build --target web
 ```
+
+### Setting up wasm32-unknown-unknown Target with wasm-pack
+
+[wasm-pack](https://rustwasm.github.io/wasm-pack/) compiles your code using the wasm32-unknown-unknown target. While Rustup setups automatically add this target, non-Rustup environments require manual setup.
+
+### Automatic Setup (Rustup)
+
+If you are using Rustup, wasm-pack will automatically add the wasm32-unknown-unknown target if it's not already installed. You can ensure its presence by running the following command:
+
+```
+rustup target add wasm32-unknown-unknown
+```
+
+### Manual Setup on Non-Rustup Environments
+
+If you're not using Rustup, wasm-pack won't automatically add the wasm32-unknown-unknown target. You'll need to do it manually. Please note that these instructions are specific to setups that match the exact rustc release.
+
+1.  Identify your rustc version by running the following command in your terminal:
+
+    ```
+    rustc --version
+    ```
+
+    This will display something like:
+    `stable-aarch64-apple-darwin `or
+    `nightly-aarch64-apple-darwin`
+    or `1.75.0-aarch64-apple-darwin (default)`.
+
+2.  Download the correct wasm32 target for your rustc version. The download URL will look like this:
+
+    ```
+    https://static.rust-lang.org/dist/rust-std-1.75.0-wasm32-unknown-unknown.tar.gz
+    ```
+
+    For different rustc versions, adjust the URL accordingly.
+
+    - Nightly: `https://static.rust-lang.org/dist/rust-std-nightly-wasm32-unknown-unknown.tar.gz`
+    - Specific date nightly (2024-02-12): `https://static.rust-lang.org/dist/2024-02-12/rust-std-nightly-wasm32-unknown-unknown.tar.gz`
+    - Beta: `https://static.rust-lang.org/dist/rust-std-beta-wasm32-unknown-unknown.tar.gz`
+
+    You can use `wget` or your web browser to download the tarball.
+
+3.  Once downloaded, unpack the tarball. This will create a folder named `rust-std-1.78.0-wasm32-unknown-unknown`. Inside this folder, locate `rust-std-wasm32-unknown-unknown`, which contains a `lib` folder.
+
+    The relevant structure should look like this:
+
+    ```plaintext
+    rust-std-1.78.0-wasm32-unknown-unknown
+    ├── components
+    ├── install.sh
+    ├── rust-installer-version
+    └── rust-std-wasm32-unknown-unknown
+        ├── lib
+        │   └── rustlib
+        │       └── wasm32-unknown-unknown
+    ```
+
+4.  Determine the location to move the `wasm32-unknown-unknown` folder by running:
+
+    ```bash
+    rustc --print sysroot
+    ```
+
+    This will print a path that looks like: `/home/user/rust/rust-1.78.0-2024-02-12-b381d3ab2`. The destination folder should contain a `lib` folder with a `rustlib` folder.
+
+5.  Move the `wasm32-unknown-unknown` folder to the appropriate location. On Unix-like systems, you can use the following command:
+
+    ```bash
+    mv rust-std-1.78.0-wasm32-unknown-unknown/rust-std-wasm32-unknown-unknown/lib/rustlib/wasm32-unknown-unknown /home/user/rust/rust-1.78.0-2024-02-12-b381d3ab2/lib/rustlib/
+    ```
+
+6.  That's it! You've manually added the `wasm32-unknown-unknown` target to your non-Rustup environment.
+
+**Disclaimer:** This method may not work for all setups, as compatibility depends on matching rustc releases. This process is designed for specific scenarios where automatic handling by Rustup is not possible.
 
 ### Serve the project using an HTTP server. You can use Python's built-in server:
 
