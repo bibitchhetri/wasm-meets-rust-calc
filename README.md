@@ -179,7 +179,9 @@ If you're not using Rustup, wasm-pack won't automatically add the wasm32-unknown
 5.  Move the `wasm32-unknown-unknown` folder to the appropriate location. On Unix-like systems, you can use the following command:
 
     ```bash
-    mv rust-std-1.78.0-wasm32-unknown-unknown/rust-std-wasm32-unknown-unknown/lib/rustlib/wasm32-unknown-unknown /home/user/rust/rust-1.78.0-2024-02-12-b381d3ab2/lib/rustlib/
+    mv <wasm32-unknown-unknown location> <rustlib location>
+    example below:
+    mv rust-std-1.78.0-wasm32-unknown-unknown/rust-std-wasm32-unknown-unknown/lib/rustlib/wasm32-unknown-unknown /opt/Homebrew/Celler/rust/rust-1.78.0-2024-02-12-b381d3ab2/lib/rustlib/
     ```
 
 6.  That's it! You've manually added the `wasm32-unknown-unknown` target to your non-Rustup environment.
